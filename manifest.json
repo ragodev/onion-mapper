@@ -1,0 +1,17 @@
+{
+	"name": "Onion Mapper",
+	"version": "0.1",
+	"description": "Redirect websites to their onion address",
+	"background": {
+		"scripts": ["background.js"]
+	},
+	"icons": {
+		"128": "icon.png"
+	},
+	"manifest_version": 2,
+	"permissions": [
+		"webRequest",
+		"webRequestBlocking",
+		"https://*/*"
+	]
+}
