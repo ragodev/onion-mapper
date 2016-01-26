@@ -1,27 +1,25 @@
-function DOMtoString(document_root) {
-    var html = '',
-    node = document_root.firstChild;
-    while (node) {
-      switch (node.nodeType) {
-      case Node.ELEMENT_NODE:
-            html += node.outerHTML;
-            break;
-      case Node.TEXT_NODE:
-            html += node.nodeValue;
-            break;
-      case Node.CDATA_SECTION_NODE:
-            html += '<![CDATA[' + node.nodeValue + ']]>';
-            break;
-      case Node.COMMENT_NODE:
-            html += '<!--' + node.nodeValue + '-->';
-            break;
-      }
-      node = node.nextSibling;
-      }
-      return html;
+function findOnions(document_root) {
+          node = document_root.firstChild;
+          while (node) {
+                var data;
+
+                switch (node.nodeType) {
+                      case Node.ELEMENT_NODE:
+                      data = node.outerHTML;
+                      break;
+
+                      case Node.TEXT_NODE:
+                      data = node.nodeValue;
+                      break;
+                }
+
+                chrome.runtime.sendMessage({
+                      action: "getSource",
+                      source: data
+                });
+
+                node = node.nextSibling;
+          }
 }
 
-chrome.runtime.sendMessage({
-      action: "getSource",
-      source: DOMtoString(document)
-});
+findOnions(document);
