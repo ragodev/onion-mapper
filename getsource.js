@@ -1,25 +1,29 @@
 function findOnions(document_root) {
           node = document_root.firstChild;
-          while (node) {
-                var data;
 
+          var data = "";
+
+          while (node) {
                 switch (node.nodeType) {
                       case Node.ELEMENT_NODE:
-                      data = node.outerHTML;
+                      data += node.outerHTML;
                       break;
 
                       case Node.TEXT_NODE:
-                      data = node.nodeValue;
+                      data += node.nodeValue;
                       break;
                 }
 
-                chrome.runtime.sendMessage({
-                      action: "getSource",
-                      source: data
-                });
-
                 node = node.nextSibling;
           }
+
+          var regexp = /[a-z0-9]{16}.onion/g;
+          var onions = data.match(regexp);
+
+          chrome.runtime.sendMessage({
+                action: "getSource",
+                source: JSON.stringify(onions)
+          });
 }
 
 findOnions(document);
