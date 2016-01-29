@@ -1,13 +1,18 @@
 chrome.runtime.onMessage.addListener(function(request, sender) {
+
+      // Remove "loading..." label
+      message.innerHTML = "";
+
       if (request.action == "getSource") {
             for (var i = 0; i < request.source.length; i++) {
-                  var host = request.source[i].host;
-                  var onion = request.source[i].onion;
-
-                  message.innerText += host + ": " + onion + "<br>";
+                  addOnionEntry(request.source[i]);
             }
       }
 });
+
+function addOnionEntry(onion) {
+      message.innerHTML += "<input type=radio name=anus value=\"" + onion + "\">" + onion + "<br>";
+}
 
 function onWindowLoad() {
       var message = document.querySelector('#message');

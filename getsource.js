@@ -21,7 +21,6 @@ function findOnions(document_root) {
           var onions = data.match(regexp);
 
           var found = [];
-          var sorted = [];
 
           for (var i = 0; i < onions.length; i++) {
                 if (found.indexOf(onions[i]) == -1) {
@@ -29,17 +28,9 @@ function findOnions(document_root) {
                 }
           }
 
-          var j = 0;
-          for (var i = 0; i < onions.length; i++) {
-                sorted[j] = {
-                      onion: onions[i],
-                      host: location.host
-                };
-          }
-
           chrome.runtime.sendMessage({
                 action: "getSource",
-                source: sorted
+                source: found
           });
 }
 
