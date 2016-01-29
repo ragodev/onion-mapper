@@ -7,11 +7,15 @@ chrome.runtime.onMessage.addListener(function(request, sender) {
             for (var i = 0; i < request.source.length; i++) {
                   addOnionEntry(request.source[i]);
             }
+
+            if (request.source.length == 0) {
+                  message.innerHTML += "<p>No onions found on this page</p>";
+            }
       }
 });
 
 function addOnionEntry(onion) {
-      message.innerHTML += "<input type=radio name=anus value=\"" + onion + "\">" + onion + "<br>";
+      message.innerHTML += "<input type=radio value=\"" + onion + "\">" + onion + "<br>";
 }
 
 function onWindowLoad() {

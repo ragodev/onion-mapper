@@ -22,10 +22,12 @@ function findOnions(document_root) {
 
           var found = [];
 
-          for (var i = 0; i < onions.length; i++) {
-                if (found.indexOf(onions[i]) == -1) {
-                      found.push(onions[i]);
-                }
+          if (onions != null) {
+                for (var i = 0; i < onions.length; i++) {
+                     if (found.indexOf(onions[i]) == -1) {
+                           found.push(onions[i]);
+                     }
+               }
           }
 
           chrome.runtime.sendMessage({
