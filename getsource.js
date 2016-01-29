@@ -20,9 +20,18 @@ function findOnions(document_root) {
           var regexp = /[a-z0-9]{16}.onion/g;
           var onions = data.match(regexp);
 
+          var sorted = [];
+
+          for (var i = 0; i < onions.length; i++) {
+                sorted[i] = {
+                      onion: onions[i],
+                      host: location.host
+                };
+          }
+
           chrome.runtime.sendMessage({
                 action: "getSource",
-                source: JSON.stringify(onions)
+                source: sorted
           });
 }
 

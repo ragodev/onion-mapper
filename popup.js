@@ -1,6 +1,11 @@
 chrome.runtime.onMessage.addListener(function(request, sender) {
       if (request.action == "getSource") {
-            message.innerText = request.source;
+            for (var i = 0; i < request.source.length; i++) {
+                  var host = request.source[i].host;
+                  var onion = request.source[i].onion;
+
+                  message.innerText += host + ": " + onion + "<br>";
+            }
       }
 });
 
