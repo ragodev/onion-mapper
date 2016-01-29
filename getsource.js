@@ -20,10 +20,18 @@ function findOnions(document_root) {
           var regexp = /[a-z0-9]{16}.onion/g;
           var onions = data.match(regexp);
 
+          var found = [];
           var sorted = [];
 
           for (var i = 0; i < onions.length; i++) {
-                sorted[i] = {
+                if (found.indexOf(onions[i]) == -1) {
+                      found.push(onions[i]);
+                }
+          }
+
+          var j = 0;
+          for (var i = 0; i < onions.length; i++) {
+                sorted[j] = {
                       onion: onions[i],
                       host: location.host
                 };
