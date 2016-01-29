@@ -15,7 +15,7 @@ chrome.runtime.onMessage.addListener(function(request, sender) {
 });
 
 function addOnionEntry(onion) {
-      message.innerHTML += "<input type=radio value=\"" + onion + "\">" + onion + "<br>";
+      message.innerHTML += "<input type=radio name=onionbutton value=\"" + onion + "\">" + onion + "<br>";
 }
 
 function onWindowLoad() {
