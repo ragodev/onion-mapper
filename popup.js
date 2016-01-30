@@ -18,6 +18,10 @@ function addOnionEntry(onion) {
       message.innerHTML += "<input type=radio name=onionbutton value=\"" + onion + "\">" + onion + "<br>";
 }
 
+function onButtonAddClick() {
+
+}
+
 function onWindowLoad() {
       var message = document.querySelector('#message');
 
@@ -31,3 +35,25 @@ function onWindowLoad() {
 }
 
 window.onload = onWindowLoad;
+
+document.addEventListener("DOMContentLoaded", function() {
+      var addbutton = document.getElementById("add");
+      addbutton.addEventListener("click", function() {
+      	chrome.tabs.getSelected(null, function(tab) {
+                  var rbtns = document.getElementsByName("onionbutton");
+
+                  for (var i = 0; i < rbtns.length; i++) {
+                        var btn = rbtns[i];
+
+                        if (btn.checked) {
+                              var onion = btn.value;
+                              var url = new URL(tab.url);
+
+                              localStorage[url.host] = onion;
+
+                              break;
+                        }
+                  }
+      	});
+      }, false);
+}, false);
