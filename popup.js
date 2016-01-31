@@ -18,10 +18,6 @@ function addOnionEntry(onion) {
       message.innerHTML += "<input type=radio name=onionbutton value=\"" + onion + "\">" + onion + "<br>";
 }
 
-function onButtonAddClick() {
-
-}
-
 function onWindowLoad() {
       var message = document.querySelector('#message');
 
