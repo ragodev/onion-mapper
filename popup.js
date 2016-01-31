@@ -28,6 +28,12 @@ function onWindowLoad() {
                   message.innerText = 'There was an error injecting script : \n' + chrome.runtime.lastError.message;
             }
       });
+
+      var existing = document.querySelector('#existing');
+
+      for (var key in localStorage) {
+            existing.innerHTML += "<input type=checkbox name=existingonions value=\"" + key + "\">" + key + ": " + localStorage[key] + "<br>";
+      }
 }
 
 window.onload = onWindowLoad;
@@ -48,6 +54,23 @@ document.addEventListener("DOMContentLoaded", function() {
                               localStorage[url.host] = onion;
 
                               break;
+                        }
+                  }
+      	});
+      }, false);
+
+      var removebutton = document.getElementById("remove");
+      removebutton.addEventListener("click", function() {
+      	chrome.tabs.getSelected(null, function(tab) {
+                  var chkbxs = document.getElementsByName("existingonions");
+
+                  for (var i = 0; i < chkbxs.length; i++) {
+                        var btn = chkbxs[i];
+
+                        if (btn.checked) {
+                              var onion = btn.value;
+
+                              delete localStorage[onion];
                         }
                   }
       	});
