@@ -25,7 +25,8 @@ function onWindowLoad() {
             file: "getsource.js"
       }, function() {
             if (chrome.runtime.lastError) {
-                  message.innerText = 'There was an error injecting script : \n' + chrome.runtime.lastError.message;
+                  message.innerHTML = 'There was an error injecting script : \n' + chrome.runtime.lastError.message;
+                  cantAdd();
             }
       });
 
@@ -34,6 +35,11 @@ function onWindowLoad() {
       for (var key in localStorage) {
             existing.innerHTML += "<input type=checkbox name=existingonions value=\"" + key + "\">" + key + ": " + localStorage[key] + "<br>";
       }
+}
+
+// Cannot add any mapping for this url
+function cantAdd() {
+      document.getElementById("add").disabled = true;
 }
 
 window.onload = onWindowLoad;
@@ -70,7 +76,7 @@ document.addEventListener("DOMContentLoaded", function() {
                         if (btn.checked) {
                               var onion = btn.value;
 
-                              delete localStorage[onion];
+                              delete localStorage[onion];cd
                         }
                   }
       	});
