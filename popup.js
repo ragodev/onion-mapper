@@ -48,18 +48,24 @@ document.addEventListener("DOMContentLoaded", function() {
       var addbutton = document.getElementById("add");
       addbutton.addEventListener("click", function() {
       	chrome.tabs.getSelected(null, function(tab) {
-                  var rbtns = document.getElementsByName("onionbutton");
+                  var manual = document.getElementById("onionbox");
+                  var url = new URL(tab.url);
 
-                  for (var i = 0; i < rbtns.length; i++) {
-                        var btn = rbtns[i];
+                  if (manual.value.length > 0) {
+                        localStorage[url.host] = manual.value;
+                  } else {
+                        var rbtns = document.getElementsByName("onionbutton");
 
-                        if (btn.checked) {
-                              var onion = btn.value;
-                              var url = new URL(tab.url);
+                        for (var i = 0; i < rbtns.length; i++) {
+                              var btn = rbtns[i];
 
-                              localStorage[url.host] = onion;
+                              if (btn.checked) {
+                                    var onion = btn.value;
 
-                              break;
+                                    localStorage[url.host] = onion;
+
+                                    break;
+                              }
                         }
                   }
       	});
@@ -74,9 +80,9 @@ document.addEventListener("DOMContentLoaded", function() {
                         var btn = chkbxs[i];
 
                         if (btn.checked) {
-                              var onion = btn.value;
+                              var url = btn.value;
 
-                              delete localStorage[onion];cd
+                              delete localStorage[url];
                         }
                   }
       	});
